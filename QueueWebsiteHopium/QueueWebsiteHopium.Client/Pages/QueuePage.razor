@@ -1,0 +1,215 @@
+﻿@page "/queue"
+@using Data.Models;
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
+
+
+<MudText>Actual players enqueued: @Queue.GetUserCount()</MudText>
+
+    @if(Queue.GetUserCount() > 1)
+        {
+            <MudText>Now playing! @Queue.Users[0].Name and @Queue.Users[1].Name</MudText>
+        }
+    @if (Queue.QueueEntries == null || !Queue.QueueEntries.Any())
+        {
+            <MudPaper Class="p-4 rounded" Style="text-align: center;">
+                <MudText Typo="Typo.h4" Align="Align.Center">
+                    Queue is Empty
+                </MudText>
+                <MudText Typo="Typo.body1" Align="Align.Center" Class="mt-2">
+                    There's currently no one playing right now!
+                </MudText>
+            </MudPaper>
+        }
+
+
+<MudPaper>
+    <MudList T="QueueEntry" Dense="false">
+        @foreach (var entry in Queue.QueueEntries)
+        {
+            <MudListItem Class="mb-2" Style="padding: 1rem; border-radius: 8px; border: 1px solid #ccc;">
+                <MudText Typo="Typo.h6" Align="Align.Center" Class="w-100" Style="display: flex; justify-content: center; gap: 1rem;">
+                    @entry.PlayerOne.Name <span>&lt;====&gt;</span> @entry.PlayerTwo.Name
+                </MudText>
+            </MudListItem>
+        }
+    </MudList>
+</MudPaper>
+
+<MudTextField T="string" @bind-Value="UserInput"/>
+<MudPaper Elevation="2" Class="p-4 mt-4; border-radius: 12px;">
+    <MudStack Justify="Justify.SpaceEvenly" AlignItems="AlignItems.Stretch" Row="true" Spacing="2" Wrap="Wrap.Wrap">
+        <MudButton Variant="Variant.Outlined" OnClick="Enqueue">Enqueue</MudButton>
+        <MudButton Variant="Variant.Outlined" Color="Color.Secondary" OnClick="Dequeue">Dequeue</MudButton>
+        <MudButton Variant="Variant.Outlined" Color="Color.Warning" OnClick="Remove">Remove</MudButton>
+        <MudButton Variant="Variant.Outlined" Color="Color.Success" OnClick="OnNext">Next</MudButton>
+        <MudButton Variant="Variant.Outlined" Color="Color.Info" OnClick="ClaimSpot">Claim</MudButton>
+        <MudButton Variant="Variant.Outlined" Color="Color.Error" OnClick="ClearList">Clear List</MudButton>
+        <MudButton Variant="Variant.Outlined" Color="Color.Dark" OnClick="DebugToggle">Debug</MudButton>
+    </MudStack>
+</MudPaper>
+
+@if(Debug) {
+<MudText>Debug:</MudText>
+    @foreach(var user in Queue.Users)
+    {
+        <MudText>@user.Name @user.Id</MudText>
+    }
+
+<MudText>Users in Memory:</MudText>
+    @foreach(var user in User.Users)
+    {
+        <MudText>@user.Name</MudText>
+    }
+}
+
+<MudDivider Class="pb-4"/>
+
+<MudPaper Class="pt-4">
+<MudText Align="Align.Center">Logs will appear here</MudText>
+<MudTable Class="pt-4" T="LogEntry" Items="@Logs.LogEntries">
+    <HeaderContent>
+        <MudTh>Date and Time</MudTh>
+        <MudTh>User</MudTh>
+        <MudTh>Action</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>@context.Date.ToString()</MudTd>
+        <MudTd>@context.User.Name</MudTd>
+        <MudTd>@context.Action</MudTd>
+    </RowTemplate>
+</MudTable>
+
+</MudPaper>
+
+@code {
+    public Logs Logs { get; set; } = new();
+    public string UserInput { get; set; }
+    public User SelectedUser { get; set; }
+    public static QueueSystemInstance Queue { get; set; } = new();
+    public (User, User) NowPlaying = new();
+    public bool Debug = false;
+    public User adam = new("Adam", Queue);
+    public User alex = new("Alex", Queue);
+    public User bustin = new("Bustin", Queue);
+    public User rui = new("Rui", Queue);
+    public User sap = new("Sap", Queue);
+    public User avi = new("Avi", Queue);
+
+    public void DebugToggle()
+    {
+        Debug = !Debug;
+    }
+
+    public void Remove()
+    {
+        if (!Queue.IsEnqueued(UserInput))
+        {
+            Snackbar.Add("That user is not in the queue!");
+            return;
+        }
+        User? user = User.GetUserByName(UserInput);
+        if(user == null)
+        {
+            Snackbar.Add("That user does not exist!");
+            return;
+        }
+
+        Queue.Remove(user);
+        UpdateQueue();
+    }
+
+    public void ClaimSpot()
+    {
+        User user = Queue.GetUserByName(UserInput);
+
+        if (user == null) return;
+
+        if(Queue.HasClaimableIndex())
+        {
+            user.Dequeue();
+            user.Enqueue();
+            UpdateQueue();
+        }
+    }
+
+    public void Enqueue()
+    {
+
+        if(UserInput == string.Empty || string.IsNullOrWhiteSpace(UserInput))
+        {
+            Snackbar.Add("Well, that's empty!");
+            return;
+        }
+
+        User user = User.GetUserByName(UserInput) ?? new(UserInput, Queue);
+
+        if(Queue.IsEnqueued(user))
+        {
+            Snackbar.Add("User is already enqueued!");
+            return;
+        }
+
+        user.Enqueue();
+        UpdateQueue();
+
+    }
+
+    public void UpdateQueue()
+    {
+        Queue.UpdateQueueEntries();
+    }
+
+    public void Dequeue()
+    {
+        if (UserInput == string.Empty)
+        {
+            Snackbar.Add("String is Empty!");
+            return;
+        }
+
+        User? user = User.GetUserByName(UserInput);
+
+        if(user == null)
+        {
+            Snackbar.Add("That user doesn't exist!");
+            return;
+        }
+
+        if(!Queue.IsEnqueued(user))
+        {
+            Snackbar.Add("This user is not enqueued!");
+            return;
+        }
+
+        user.Dequeue();
+        UpdateQueue();
+    }
+
+    public void OnNext()
+    {
+        Queue.Next();
+        UpdateQueue();
+    }
+
+    public void ClearList()
+    {
+        Queue.ClearList();
+        UpdateQueue();
+    }
+
+    protected override void OnInitialized()
+    {
+        adam.Enqueue();
+        alex.Enqueue();
+        bustin.Enqueue();
+        rui.Enqueue();
+        sap.Enqueue();
+        avi.Enqueue();
+
+        UpdateQueue();
+
+        base.OnInitialized();
+    }
+
+    }

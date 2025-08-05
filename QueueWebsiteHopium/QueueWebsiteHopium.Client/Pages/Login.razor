@@ -1,0 +1,81 @@
+﻿@page "/login"
+@inject NavigationManager Navigation
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-12 d-flex justify-center">
+    <MudPaper Elevation="12" Class="p-6" Style="width: 100%; max-width: 400px;">
+        <MudText Typo="Typo.h4" Align="Align.Center" GutterBottom>Welcome to Maimai!</MudText>
+
+        <MudTextField @bind-Value="_username" Label="Username" Required="true" Class="mb-3" />
+
+        @if (!_loginAsGuest)
+        {
+            <MudTextField @bind-Value="_password" Label="Password" InputType="InputType.Password" Required="true" Class="mb-3" />
+        }
+
+        <MudCheckBox T="bool" @bind-Checked="_loginAsGuest" Label="Login as Guest" Class="mb-2" />
+        <MudCheckBox T="bool" @bind-Checked="_stayLoggedIn" Label="Stay Logged In" Class="mb-4" />
+
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="LoginAsync" FullWidth>Login</MudButton>
+
+        <MudText Class="mt-3" Color="Color.Error">@_errorMessage</MudText>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private string _username = string.Empty;
+    private string _password = string.Empty;
+    private bool _loginAsGuest = false;
+    private bool _stayLoggedIn = false;
+    private string _errorMessage = string.Empty;
+
+    private async Task LoginAsync()
+    {
+        _errorMessage = string.Empty;
+
+        if (string.IsNullOrWhiteSpace(_username) || (!_loginAsGuest && string.IsNullOrWhiteSpace(_password)))
+        {
+            _errorMessage = "Please fill in the required fields.";
+            return;
+        }
+
+        try
+        {
+            // Mocked API payload
+            var payload = new
+            {
+                username = _username,
+                password = _password,
+                isGuest = _loginAsGuest
+            };
+
+            // Simulate API call
+            var response = await Http.PostAsJsonAsync("api/auth/login", payload);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                _errorMessage = "Login failed. Invalid credentials.";
+                return;
+            }
+
+            var token = await response.Content.ReadAsStringAsync(); // Expecting a token
+
+            if (_stayLoggedIn)
+            {
+                await JS.InvokeVoidAsync("localStorage.setItem", "token", token);
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("sessionStorage.setItem", "token", token);
+            }
+
+            Navigation.NavigateTo("/queue"); // Or your main page
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = "An error occurred during login.";
+            Console.WriteLine(ex.Message);
+        }
+    }
+}

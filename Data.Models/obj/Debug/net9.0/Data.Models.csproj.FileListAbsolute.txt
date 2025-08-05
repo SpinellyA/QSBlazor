@@ -1,0 +1,12 @@
+C:\Users\alexs\source\repos\QueueWebsiteHopium\Data.Models\bin\Debug\net9.0\Data.Models.deps.json
+C:\Users\alexs\source\repos\QueueWebsiteHopium\Data.Models\bin\Debug\net9.0\Data.Models.dll
+C:\Users\alexs\source\repos\QueueWebsiteHopium\Data.Models\bin\Debug\net9.0\Data.Models.pdb
+C:\Users\alexs\source\repos\QueueWebsiteHopium\Data.Models\obj\Debug\net9.0\Data.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alexs\source\repos\QueueWebsiteHopium\Data.Models\obj\Debug\net9.0\Data.Models.AssemblyInfoInputs.cache
+C:\Users\alexs\source\repos\QueueWebsiteHopium\Data.Models\obj\Debug\net9.0\Data.Models.AssemblyInfo.cs
+C:\Users\alexs\source\repos\QueueWebsiteHopium\Data.Models\obj\Debug\net9.0\Data.Models.csproj.CoreCompileInputs.cache
+C:\Users\alexs\source\repos\QueueWebsiteHopium\Data.Models\obj\Debug\net9.0\Data.Models.sourcelink.json
+C:\Users\alexs\source\repos\QueueWebsiteHopium\Data.Models\obj\Debug\net9.0\Data.Models.dll
+C:\Users\alexs\source\repos\QueueWebsiteHopium\Data.Models\obj\Debug\net9.0\refint\Data.Models.dll
+C:\Users\alexs\source\repos\QueueWebsiteHopium\Data.Models\obj\Debug\net9.0\Data.Models.pdb
+C:\Users\alexs\source\repos\QueueWebsiteHopium\Data.Models\obj\Debug\net9.0\ref\Data.Models.dll

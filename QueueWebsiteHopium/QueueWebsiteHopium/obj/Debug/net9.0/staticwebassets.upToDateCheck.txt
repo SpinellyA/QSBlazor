@@ -1,0 +1,2 @@
+wwwroot\favicon.ico
+C:\Users\alexs\source\repos\QueueWebsiteHopium\QueueWebsiteHopium\QueueWebsiteHopium\wwwroot\favicon.ico
