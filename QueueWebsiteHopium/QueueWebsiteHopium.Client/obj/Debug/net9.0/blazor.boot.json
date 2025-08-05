@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "QueueWebsiteHopium.Client",
   "resources": {
-    "hash": "sha256-wXZCQueK+uG5BKxKvAJcCtpM7a6i9wOUkvi4JrLJOqw=",
+    "hash": "sha256-QiU/+AJq0Ixwa2f6/6krc8IMZNX3dguo9/N2AhGENmg=",
     "fingerprinting": {
       "Microsoft.AspNetCore.Authorization.bvu82j4ad3.wasm": "Microsoft.AspNetCore.Authorization.wasm",
       "Microsoft.AspNetCore.Components.ptfrz3fits.wasm": "Microsoft.AspNetCore.Components.wasm",
@@ -204,10 +204,10 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "Data.Models.7x7ou7wtnd.wasm": "Data.Models.wasm",
-      "Data.Models.0o1ig0t21v.pdb": "Data.Models.pdb",
-      "QueueWebsiteHopium.Client.qt26n94owc.wasm": "QueueWebsiteHopium.Client.wasm",
-      "QueueWebsiteHopium.Client.bwro6ny6sz.pdb": "QueueWebsiteHopium.Client.pdb"
+      "Data.Models.jw49j4lr5i.wasm": "Data.Models.wasm",
+      "Data.Models.hqb5di793f.pdb": "Data.Models.pdb",
+      "QueueWebsiteHopium.Client.6tnmn0vvmq.wasm": "QueueWebsiteHopium.Client.wasm",
+      "QueueWebsiteHopium.Client.9vewfvgjdj.pdb": "QueueWebsiteHopium.Client.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.st0ovrfdhi.js": "sha256-MBW/zayfv+YU6mhH7y4b8NNU4D1EYd7nf9gYrFshnnY="
@@ -420,12 +420,12 @@
       "WindowsBase.pg3o6xzigg.wasm": "sha256-dz62CHynC+zqTkbMOf3vm7YAhiRA8/pIoAwuqHfBL5M=",
       "mscorlib.jl2pswegra.wasm": "sha256-mSoCIDTdCQKTipW8VmFCypW/4AopZauaYRa8LoZdHvY=",
       "netstandard.uriri6ambh.wasm": "sha256-yuH/cvPd6r8N9nfPWihyckFD7hPFP+VQtQQxEqi7HIQ=",
-      "Data.Models.7x7ou7wtnd.wasm": "sha256-G9gWJvTQebEoTJR96uKhS/0icatUa8+HfQ0sNosnmv0=",
-      "QueueWebsiteHopium.Client.qt26n94owc.wasm": "sha256-zs6jli70g0ltuKqqLdWZ/7ccYhrYWy/Sb5XrdxJeBjY="
+      "Data.Models.jw49j4lr5i.wasm": "sha256-ExRiOBmtLk0YF90+vu93NIkox1x4E4fTW0SiAaWkj7k=",
+      "QueueWebsiteHopium.Client.6tnmn0vvmq.wasm": "sha256-9rYn+SsLkGuQXDkI4h063Wi6Ou4FCRH5MIgYQyldAUg="
     },
     "pdb": {
-      "Data.Models.0o1ig0t21v.pdb": "sha256-EMeaPwwxjQm9DkdE4hiiJGPTuyDkTBG1pSI1KRRZ9XM=",
-      "QueueWebsiteHopium.Client.bwro6ny6sz.pdb": "sha256-O8Ut2rChbqN2g76hYK93nqmkwvSxzrn/cxMkP9sjL70="
+      "Data.Models.hqb5di793f.pdb": "sha256-qS+pQfHIBxINfbkFMsJQQQl/oZtAUksL86Ny9lpjDLA=",
+      "QueueWebsiteHopium.Client.9vewfvgjdj.pdb": "sha256-u+G1NaySjfO01bPSr4UQRwCldZvtDN1YaqKY2DE8RRM="
     }
   },
   "cacheBootResources": true,

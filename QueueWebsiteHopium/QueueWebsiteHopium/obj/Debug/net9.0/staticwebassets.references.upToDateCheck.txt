@@ -59,3 +59,4 @@ C:\Users\alexs\source\repos\QueueWebsiteHopium\QueueWebsiteHopium\QueueWebsiteHo
 C:\Users\alexs\source\repos\QueueWebsiteHopium\QueueWebsiteHopium\QueueWebsiteHopium.Client\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\alexs\source\repos\QueueWebsiteHopium\QueueWebsiteHopium\QueueWebsiteHopium.Client\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\alexs\source\repos\QueueWebsiteHopium\QueueWebsiteHopium\QueueWebsiteHopium.Client\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\alexs\source\repos\QueueWebsiteHopium\QueueWebsiteHopium\QueueWebsiteHopium.Client\obj\Debug\net9.0\staticwebassets.build.json
